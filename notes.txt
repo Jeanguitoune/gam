@@ -1,0 +1,33 @@
+3 heaps of 4, 5 & 6 sticks
+
+2 players
+
+players play alternatively by picking
+from 1 to 3 picks from one of the different
+heaps.
+
+
+
+===========================================
+
+Implementation:
+
+C
+bitwise
+
+AI: to determine
+
+
+===========================================
+
+Simple design:
+
+Showing the three heaps
+Explaining the last move and giving the ability
+to display the full log of the game
+
+===========================================
+
+Next:
+Set of different games for different AI's algorithm... ?
+C++ * UI ??
