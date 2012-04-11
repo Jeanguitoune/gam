@@ -1,57 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int decrementHeap(int heap, int nb)
+unsigned int heapA;
+unsigned int heapB;
+unsigned int heapC;
+int mode;
+
+char initialization()
 {
-	heap = heap >> nb;
-	return heap;	
-	// return heap >> nb;
-}
-
-void displayGame(int heapA, int heapB, int heapC)
-{
-	printf("=================================\n");
-	printf("heapA: %d\n",heapA);
-	printf("heapB: %d\n",heapB);
-	printf("heapC: %d\n",heapC);
-	printf("=================================\n");
-}	
-
-void displayLog()
-{
-
-}
-
-int endGame(int heapA, int heapB, int heapC)
-{
-	
-	return 0;
-}
-
-
-void main(void)
-{
-	unsigned int heapA, heapB, heapC;
+	heapA = 0x0f;//4 sticks
+	heapB = 0x1f;//5 sticks
+	heapC = 0x3f;//6 sticks
 	char begin;
-	int nbSticks, nbHeap;
-	int win;	
-
-	heapA = 0x3f;// 6 sticks heap
-	heapB = 0x1f;// 5 sticks heap
-	heapC = 0x0f;// 4 sticks heap
 	
 	do
-	{ 
-		printf("Do you want to begin? (n: no) (y: yes)\n");
-		scanf("%c", &begin);
-	}while(begin != 'y' && begin != 'n');
+	{
+		printf("Play vs computer (1) or human (2)?\n");
+		scanf("%d",&mode);
+	}while(mode != 1 && mode != 2);
 	
-	if(begin == 'y')
-		printf("You begin\n");
-	else
-		printf("The AI begin\n");
+	do
+        {
+                printf("Do you want to begin? (n: no) (y: yes)\n");
+                scanf("%c", &begin);
+        }while(begin != 'y' && begin != 'n');
 
-	displayGame(heapA, heapB, heapC);	
+        if(begin == 'y')
+                printf("You begin\n");
+        else
+                printf("The AI begin\n");
+	return begin;
+}
+
+void computerTurn()
+{
+
+}
+
+void playerTurn(int playerNb)
+{
+	int nbHeap, nbSticks;
+	
+	printf("Player %d's turn\n", playerNb);
 	do
 	{
 		printf("Which heap do you want to remove sticks from?\n");
@@ -65,21 +55,114 @@ void main(void)
 	}while(nbSticks < 1 || nbSticks > 3);
 	
 	if (nbHeap == 1)
-		heapA = decrementHeap(heapA, nbSticks);
+		heapA = heapA >> nbSticks;
 	if (nbHeap == 2)	
-		heapB = decrementHeap(heapB, nbSticks);
+		heapB = heapB >> nbSticks;
 	if (nbHeap == 3)
-                heapC = decrementHeap(heapC, nbSticks);
+                heapC = heapC >> nbSticks;
 
-	displayGame(heapA, heapB, heapC);	
-	/*
+}
+
+int validMove(heapNb, nbSticks)
+{
+	//TODO
+	return 1;
+}
+
+void displayGame()
+{
+	
+	int heap;	
+
+	printf("=================================\n");
+	printf("heap 1: ");
+	heap = heapA;
+	while(heap != 0x00)
+	{
+		printf("|");
+		heap = heap >> 1;
+	}
+	printf("\nheap 3: ");
+	heap = heapB;
+	while(heap != 0x00)
+	{
+		printf("|");
+		heap = heap >> 1;
+	}
+	printf("\nheap 3: ");
+	heap = heapC;
+	while(heap != 0x00)
+	{
+		printf("|");
+		heap = heap >> 1;	
+	}
+	printf("\n");
+	printf("=================================\n");
+}	
+
+void displayLog()
+{
+
+}
+
+int endGame()
+{
+	if(heapA == 0x01 && heapB == 0x00 && heapC == 0x00)
+		return 0;
+	else if(heapA == 0x00 && heapB == 0x01 && heapC == 0x00)
+		return 0;
+	else if(heapA == 0x00 && heapB == 0x00 && heapC == 0x01)
+		return 0;
+	else	
+		return 1;
+}
+
+void conclusion()
+{
+	if(mode == 1)
+	{
+		printf("Display winner in Computer mode\n");
+	}
+	else
+	{
+		printf("Display winner in  mode\n");
+	}
+
+
+	//printf("Do you want to display full log of the game?\n");
+	
+}
+
+void main(void)
+{
+	char begin;
+	int toPlay, win;	
+
+	begin = initialization();
+	if(begin == 'y')
+		toPlay = 1;
+	else
+		toPlay = 2;
 	do
 	{
-		printf();
-		scanf();
-
-	}while( choosen_heap > 3 || choosen_heap < 1 );
-	*/
-	
-	
+		if(toPlay == 1)
+		{
+			if(mode == 1 && begin != 'y')
+                                computerTurn();
+                        else
+                                playerTurn(toPlay);
+				toPlay == 2;
+		}
+		else if(toPlay == 2)
+		{
+			if(mode == 1 && begin == 'y')
+				computerTurn();
+			else
+				playerTurn(toPlay);
+			toPlay == 1;
+		}
+		displayGame();	
+	}
+	while(endGame() == 1);
+	conclusion();
 }

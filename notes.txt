@@ -31,3 +31,5 @@ to display the full log of the game
 Next:
 Set of different games for different AI's algorithm... ?
 C++ * UI ??
+website
+different games (sudoku solver + sudoku generator)
