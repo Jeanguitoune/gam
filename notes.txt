@@ -17,6 +17,7 @@ bitwise
 
 AI: to determine
 
+Taunt: Already Lost ! :) avec l'AI
 
 ===========================================
 
@@ -33,3 +34,8 @@ Set of different games for different AI's algorithm... ?
 C++ * UI ??
 website
 different games (sudoku solver + sudoku generator)
+
+
+	 validity of the move front end
+	 process of the AI back end
+
